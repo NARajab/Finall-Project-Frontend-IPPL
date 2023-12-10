@@ -144,7 +144,7 @@ const Navbar = () => {
                   } transition-transform duration-300 ease-in-out absolute top-0 right-0 mt-16  bg-gradient-to-l from-indigo-200 border border-indigo-300 px-5 py-6 rounded-md shadow-lg `}
                 >
                   <ul className="flex flex-col gap-4">
-                    <NavLink as={Link} to={"/"}>
+                    <NavLink as={Link} to={"/login"}>
                       <li
                         onClick={() => handleIconClick("Masuk")}
                         className="flex flex-row-reverse"

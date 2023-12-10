@@ -8,6 +8,7 @@ const Menu = () => {
   const handleLogout = () => {
     localStorage.removeItem("...");
   };
+
   const getUserIdFromToken = () => {
     const token = localStorage.getItem("...");
     if (token) {

@@ -168,10 +168,14 @@ const HomePage = () => {
       </div>
 
       {/* Kursus Populer */}
-      <div className="max-w-screen-lg px-6 mx-auto lg:p-0">
+      <div className="max-w-screen-lg px-6 mx-auto mt-20 md:mt-0 lg:p-0">
         {/* title */}
         <div className="flex items-center justify-between">
-          <h1 className="my-4 text-xl font-bold md:text-2xl">Kursus Populer</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="my-4 text-xl font-bold md:text-2xl">
+              Kursus Populer
+            </h1>
+          </div>
           <Link to={`/course/${userId}`} className="text-sm text-indigo-500">
             Lihat Semua
           </Link>
