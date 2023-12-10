@@ -5,8 +5,8 @@ import { cn } from "../../libs/utils";
 import Card from "./Card";
 import PropTypes from "prop-types";
 
-const Main = ({ courses, valueChecked, id }) => {
-  // console.log(data);
+const Main = ({ courses, categories, valueChecked, id }) => {
+  // console.log(categories);
   // console.log(courses);
   const [flag, setFlag] = useState(0);
 
@@ -19,14 +19,16 @@ const Main = ({ courses, valueChecked, id }) => {
   //   }
   const filterCourses = () => {
     if (flag === "All" && valueChecked) {
-      return (
-        courses.filter((item) => item.Category === valueChecked) &&
-        courses.filter((item) => item.Level === valueChecked)
+      return courses.filter(
+        (item) => item.Category === valueChecked || item.Level === valueChecked
       );
     } else if (flag === "inProgress" && valueChecked) {
-      return (
-        courses.filter((item) => item.Category === valueChecked) &&
-        courses.filter((item) => item.Level === valueChecked)
+      return courses.filter(
+        (item) => item.Category === valueChecked || item.Level === valueChecked
+      );
+    } else if (flag === "Selesai" && valueChecked) {
+      return courses.filter(
+        (item) => item.Category === valueChecked || item.Level === valueChecked
       );
     } else if (flag === "All") {
       return courses;

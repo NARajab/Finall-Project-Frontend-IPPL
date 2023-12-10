@@ -47,6 +47,20 @@ const resetPassword = async (password, confirmPassword, userId) => {
   return res.data.message;
 };
 
+const newPasswordUser = async (
+  oldPassword,
+  newPassword,
+  confirmPassword,
+  userId
+) => {
+  const res = await api.patch(`/auth/update-password/${userId}`, {
+    oldPassword: oldPassword,
+    newPassword: newPassword,
+    confirmPassword: confirmPassword,
+  });
+  return res.data.message;
+};
+
 const getEmail = async (email) => {
   const res = await api.get(`/user/get?email=${email}`);
   return res.data.data.user.userId;
@@ -59,7 +73,7 @@ const getCategory = async () => {
 
 const createCourse = async (userId, courseId, token) => {
   const res = await api.post(
-    `/user/create/${userId}`,
+    `/course-user/create/${userId}`,
     {
       courseId,
     },
@@ -78,13 +92,27 @@ const getCourse = async () => {
 };
 
 const getCourseById = async (userId, courseId) => {
-  const res = await api.get(`/user/getData/${userId}/${courseId}`);
+  const res = await api.get(`/course-user/getData/${userId}/${courseId}`);
   return res.data.data;
 };
 
+const updateCourseStatus = async (userId, courseId) => {
+  const res = await api.patch(
+    `/course-user/update-status/${userId}/${courseId}`
+  );
+  return res.data;
+};
+
 const getCourseUser = async (userId) => {
-  const res = await api.get(`/user/getData/${userId}`);
+  const res = await api.get(`/course-user/getData/${userId}`);
   return res.data.data;
+};
+
+const updateStatus = async (chapterId, contentId) => {
+  const res = await api.patch(
+    `/content/update-status/${chapterId}/${contentId}`
+  );
+  return res.data;
 };
 
 const getMe = async (token) => {
@@ -136,12 +164,15 @@ export {
   resendOtp,
   verifyOtp,
   resetPassword,
+  newPasswordUser,
   getEmail,
   getCategory,
   createCourse,
+  updateCourseStatus,
   getCourse,
   getCourseUser,
   getCourseById,
+  updateStatus,
   getMe,
   updateMe,
 };

@@ -1,16 +1,22 @@
-import { Book, Clock, Gem, Shield } from "lucide-react";
+import { Book, Clock, Shield } from "lucide-react";
 // import Progressbar from "../MyCourseComponent/ProgressBar";
 import { FaStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const CardCourse = ({ item }) => {
+const CardCourse = ({ item, selectedCategory }) => {
+  console.log(item);
+
+  const filteredItems = selectedCategory
+    ? item.filter((val) => val.Category === selectedCategory)
+    : item;
+
   const compareByRating = (a, b) => {
     if (a.rating < b.rating) return 1;
     if (a.rating > b.rating) return -1;
     return 0;
   };
-  const sortedItems = [...item].sort(compareByRating);
+  const sortedItems = [...filteredItems].sort(compareByRating);
   return (
     <div className="grid grid-cols-1 gap-2 mt-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:mt-4">
       {sortedItems.map((val) => (
@@ -89,4 +95,5 @@ export default CardCourse;
 
 CardCourse.propTypes = {
   item: PropTypes.array,
+  selectedCategory: PropTypes.string,
 };

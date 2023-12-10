@@ -2,24 +2,32 @@
 import PropTypes from "prop-types";
 import { FaCirclePlay } from "react-icons/fa6";
 import { FaRegPauseCircle } from "react-icons/fa";
+import { updateStatus } from "../../api/fetching";
 
 // isi dari setiap chapter
-const ChapterItem = ({
-  contentData,
-  isActive,
-  handleVideoLink,
-  onVideoClick,
-  index,
-}) => {
+const ChapterItem = ({ contentData, isActive, handleVideoLink, index }) => {
   if (!contentData) {
     return null; // Atau tindakan yang sesuai jika item tidak ada
   }
   const status = contentData.status || false;
 
-  // console.log(contentData);
+  const chapterId = contentData.chapterId;
+  const contentId = contentData.id;
+  // console.log(chapterId);
+  console.log(contentData);
+
+  const handleContentStatus = async () => {
+    try {
+      const res = await updateStatus(chapterId, contentId);
+      console.log(res);
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  };
+
   return (
     <div>
-      <div className="flex justify-between mt-3">
+      <div onClick={handleContentStatus} className="flex justify-between mt-3">
         <div className="flex items-center w-full">
           <div className="flex items-center justify-center w-6 rounded-full aspect-square md:w-8 bg-slate-200">
             <p className=" text-[10px] text-xs font-bold">{index + 1}</p>
@@ -39,7 +47,7 @@ const ChapterItem = ({
                 className="w-5 h-5"
                 style={{ color: status ? "#73CA5C" : "#6148FF" }}
                 // onClick={contentData.contentUrl}
-                onClick={() => onVideoClick}
+                // onClick={onVideoClick}
               />
             )}
           </span>

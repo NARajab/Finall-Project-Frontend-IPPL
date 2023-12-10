@@ -5,13 +5,14 @@ import { Search } from "lucide-react";
 import Main from "../../components/MyCourseComponent/Main";
 import SideFilter from "../../components/MyCourseComponent/SideFilter";
 import Navbar from "../../components/NavbarComponent/Navbar";
-import { getCourseUser } from "../../api/fetching";
+import { getCourseUser, getCategory } from "../../api/fetching";
 
 const MyCoursePage = () => {
   const data = ["All", "In Progress", "Done"];
   const { userId } = useParams();
-  const [userCourses, setuserCourses] = useState();
+  const [userCourses, setUserCourses] = useState();
   const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [level, setLevel] = useState([]);
   const [valueChecked, setValueChecked] = useState("");
 
@@ -19,25 +20,21 @@ const MyCoursePage = () => {
     const fetchData = async () => {
       try {
         const resGetUserCourse = await getCourseUser(userId);
-        setuserCourses(resGetUserCourse);
-        setCategory(resGetUserCourse.Category);
-        setLevel(resGetUserCourse.Level);
-        // console.log(resGetUserCourse.Category);
+        const resGetCategory = await getCategory();
+        setUserCourses(resGetUserCourse);
+        setCategory(resGetCategory);
+        setCategories(resGetCategory.Category);
+        setLevel(resGetUserCourse);
+        console.log(resGetCategory);
       } catch (err) {
         throw new Error(err.message);
       }
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
-  // console.log(category);
-  // console.log(level);
-  // console.log(userCourses);
   const handleCheckboxChange = (e) => {
     setValueChecked(e.target.checked ? e.target.value : "");
   };
-
-  console.log(valueChecked);
 
   return (
     <>

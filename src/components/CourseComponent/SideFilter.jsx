@@ -6,16 +6,11 @@ import { XCircle } from "lucide-react";
 import { FaFilter } from "react-icons/fa";
 
 const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
-  const filter = ["Paling Baru", "Paling Populer", "Promo"];
-  const kategori = [
-    "UI/UX Design",
-    "Web Development",
-    "Android Developer",
-    "Data Science",
-    "Business Software",
-  ];
-  const level = ["Beginner", "Intermediate", "Advanced"];
   const [open, setOpen] = useState(false);
+  if (!categorys) {
+    return null;
+  }
+  const level = ["Beginner", "Intermediate", "Advanced"];
 
   return (
     <>
@@ -63,18 +58,18 @@ const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
           {/* kategori */}
           <div className="mx-5 my-2">
             <h1 className="text-lg font-bold tracking-wider">Kategori</h1>
-            {kategori.map((item, index) => (
-              <div className="flex items-center my-2 ml-1" key={index}>
+            {categorys.map((category) => (
+              <div className="flex items-center my-2 ml-1" key={category.id}>
                 <label className="checkbox-label">
                   <input
                     type="checkbox"
-                    value={item}
+                    value={category.categoryName}
                     onChange={handleCheckboxChange}
                   />
                   <span className="checkbox-custom rectangular"></span>
                 </label>
                 <p className="ml-4 text-sm font-semibold text-slate-600 -tracking-wide">
-                  {item}
+                  {category.categoryName}
                 </p>
               </div>
             ))}

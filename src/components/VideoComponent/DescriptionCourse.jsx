@@ -4,6 +4,7 @@ const DescriptionCourse = ({ item }) => {
   if (!item) {
     return null; // Atau tindakan yang sesuai jika item tidak ada
   }
+  // console.log(item);
   return (
     <div className="mx-4 mb-5 md:mx-0">
       <div className="flex flex-col">
@@ -17,7 +18,9 @@ const DescriptionCourse = ({ item }) => {
           <h1 className="font-semibold md:text-xl">
             Kelas ini Ditujukan Untuk
           </h1>
-          <p>{item.objectiveCourse}</p>
+          <p className="text-xs text-justify indent-5 md:text-sm">
+            {item.objectiveCourse}
+          </p>
         </div>
       </div>
     </div>

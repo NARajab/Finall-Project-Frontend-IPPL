@@ -42,7 +42,7 @@ const UserPage = () => {
         setCountry(resGetMe.country);
         setCity(resGetMe.city);
 
-        console.log(resGetMe);
+        // console.log(resGetMe);
       } catch (err) {
         throw new Error(err.message);
       }
@@ -64,7 +64,8 @@ const UserPage = () => {
         token
       );
       setImage(resUpdate.image);
-      console.log(resUpdate);
+      window.location.reload(true);
+      // console.log(resUpdate);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         setAlertMessage({ type: "error", message: err.response.data.message });
@@ -127,11 +128,7 @@ const UserPage = () => {
                 {/*  image profile */}
                 <div className="relative flex flex-col items-center -mt-10 lg:mt-0">
                   <img
-                    src={
-                      image
-                        ? image
-                        : "https://via.placeholder.com/150.png?text=img"
-                    }
+                    src={image}
                     alt="avatar"
                     className="rounded-full shadow-md w-28"
                   />
@@ -255,8 +252,7 @@ const UserPage = () => {
                   <div className="mt-2">
                     <button
                       onClick={handleChange}
-                      className={`w-full bg-indigo-500 text-sm font-medium text-white py-2 px-6 rounded-2xl hover:bg-indigo-600 focus:outline-none focus:shadow-outline-blue
-                                 `}
+                      className={`w-full bg-indigo-500 text-sm font-medium text-white py-2 px-6 rounded-2xl hover:bg-indigo-600 focus:outline-none focus:shadow-outline-blue`}
                     >
                       Simpan Profil Saya
                     </button>
@@ -273,10 +269,3 @@ const UserPage = () => {
 };
 
 export default UserPage;
-// ${
-//                                    Object.values(profile).every(
-//                                      (value) => value.trim() !== ""
-//                                    )
-//                                      ? ""
-//                                      : "cursor-not-allowed opacity-50"
-//                                  }`

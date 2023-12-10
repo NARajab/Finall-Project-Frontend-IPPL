@@ -1,22 +1,39 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { Book, Clock, Gem, Shield } from "lucide-react";
-import Progressbar from "./ProgressBar";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
 // card course
 const Card = ({ item, onCardClick }) => {
+  const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("..."));
+  const [token, setToken] = useState(localStorage.getItem("..."));
+
+  useEffect(() => {
+    setLoggedIn(!!localStorage.getItem("..."));
+    setToken(localStorage.getItem("..."));
+  }, [token]);
+
   const handleClick = () => {
     if (onCardClick) {
       onCardClick(item.id);
     }
+    console.log(item.id);
   };
   // const items = Array.isArray(item) ? item : [item];
   return (
     <>
-      <Link onClick={handleClick}>
+      <Link
+        onClick={() => {
+          if (isLoggedIn) {
+            handleClick();
+          } else {
+            alert("Anda harus login untuk mengakses ini");
+          }
+        }}
+      >
         <div className="w-full pb-3 overflow-hidden bg-white rounded-lg">
           <div className="flex flex-col">
             <div>
@@ -40,7 +57,7 @@ const Card = ({ item, onCardClick }) => {
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-semibold text-black lg:text-base -tracking-widest md:-tracking-wider">
-                  {item.aboutCourse}
+                  {item.courseName}
                 </h3>
                 <div className="flex flex-wrap justify-between mt-3">
                   <p className="flex items-center text-xs font-semibold text-color-primary -tracking-widest md:-tracking-wider">
@@ -64,55 +81,12 @@ const Card = ({ item, onCardClick }) => {
                 </div>
 
                 {/* Ini button ketika gratis */}
-                {item.coursePrice === 0 && (
-                  <div className="my-2">
-                    <button className="px-4 py-1 text-xs font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:scale-105">
-                      Mulai Kelas
-                    </button>
-                  </div>
-                )}
-                {/* ini button ketika premium dan belum beli */}
-                {item.courseType === "Premium" && item.coursePrice > 0 && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-blue-400 rounded-full hover:scale-105">
-                      <span className="mr-2">
-                        <Gem size={16} />
-                      </span>{" "}
-                      Premiun
-                    </button>
-                  </div>
-                )}
-                {/* button ketika mau beli (ada harganya) */}
-                {item.courseType !== "Premium" && item.coursePrice > 0 && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-blue-400 rounded-full hover:scale-105">
-                      {item.COurse && item.Course.coursePrice}
-                    </button>
-                  </div>
-                )}
-                {/* Ini untuk riwayat dan status bayarnya belum bayar */}
-                {item.coursePrice === 0 &&
-                  item.paymentStatus === "not_paid" && (
-                    <div className="my-2">
-                      <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-red-500 rounded-full hover:scale-105">
-                        <span className="mr-2">
-                          <Gem size={16} />
-                        </span>{" "}
-                        Waiting for payment
-                      </button>
-                    </div>
-                  )}
-                {/* Ini untuk riwayat dan status bayarnya udah bayar */}
-                {item.paymentStatus === "paid" && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-green-400 rounded-full hover:scale-105">
-                      <span className="mr-2">
-                        <Gem size={16} />
-                      </span>{" "}
-                      Paid
-                    </button>
-                  </div>
-                )}
+
+                <div className="my-2">
+                  <button className="px-4 py-1 text-xs font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:scale-105">
+                    Mulai Kelas
+                  </button>
+                </div>
               </div>
             </div>
           </div>

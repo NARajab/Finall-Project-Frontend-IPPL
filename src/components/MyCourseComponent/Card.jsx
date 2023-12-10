@@ -58,56 +58,11 @@ const Card = ({ item, id }) => {
                   </p>
                 </div>
 
-                {/* Ini button ketika gratis */}
-                {item.coursePrice === 0 && (
-                  <div className="my-2">
-                    <button className="px-4 py-1 text-xs font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:scale-105">
-                      Mulai Kelas
-                    </button>
-                  </div>
-                )}
-                {/* ini button ketika premium dan belum beli */}
-                {item.courseType === "Premium" && item.coursePrice > 0 && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-blue-400 rounded-full hover:scale-105">
-                      <span className="mr-2">
-                        <Gem size={16} />
-                      </span>{" "}
-                      Premiun
-                    </button>
-                  </div>
-                )}
-                {/* button ketika mau beli (ada harganya) */}
-                {item.courseType !== "Premium" && item.coursePrice > 0 && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-blue-400 rounded-full hover:scale-105">
-                      {item.COurse && item.Course.coursePrice}
-                    </button>
-                  </div>
-                )}
-                {/* Ini untuk riwayat dan status bayarnya belum bayar */}
-                {item.coursePrice === 0 &&
-                  item.paymentStatus === "not_paid" && (
-                    <div className="my-2">
-                      <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-red-500 rounded-full hover:scale-105">
-                        <span className="mr-2">
-                          <Gem size={16} />
-                        </span>{" "}
-                        Waiting for payment
-                      </button>
-                    </div>
-                  )}
-                {/* Ini untuk riwayat dan status bayarnya udah bayar */}
-                {item.paymentStatus === "paid" && (
-                  <div className="my-2">
-                    <button className="flex items-center justify-between px-4 py-1 text-xs font-semibold text-white transition-all duration-300 bg-green-400 rounded-full hover:scale-105">
-                      <span className="mr-2">
-                        <Gem size={16} />
-                      </span>{" "}
-                      Paid
-                    </button>
-                  </div>
-                )}
+                <div className="my-2">
+                  <button className="px-4 py-1 text-xs font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:scale-105">
+                    Mulai Kelas
+                  </button>
+                </div>
               </div>
             </div>
           </div>

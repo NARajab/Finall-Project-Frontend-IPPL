@@ -5,18 +5,19 @@ import { cn } from "../../libs/utils";
 import { XCircle } from "lucide-react";
 import { FaFilter } from "react-icons/fa";
 
-const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
-  const filter = ["Paling Baru", "Paling Populer", "Promo"];
-  const kategori = [
-    "UI/UX Design",
-    "Web Development",
-    "Android Developer",
-    "Data Science",
-    "Business Software",
-  ];
-  const level = ["Beginner", "Intermediate", "Advanced"];
+const SideFilter = ({
+  categorys,
+  categories,
+  levels,
+  handleCheckboxChange,
+}) => {
   const [open, setOpen] = useState(false);
+  // console.log(categorys);
+  if (!categorys) {
+    return null;
+  }
 
+  const level = ["Beginner", "Intermediate", "Advanced"];
   return (
     <>
       {/* tombol ketika tampilan mobile untuk melihat filter */}
@@ -46,40 +47,27 @@ const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
             <XCircle />
           </div>
           {/* filter  */}
-          {/* <div className="mx-5 my-2 mt-6">
-            <h1 className="text-lg font-bold tracking-wider">Filter</h1>
-            {filter.map((item, index) => (
-              <div className="flex items-center my-2 ml-1" key={index}>
-                <label className="checkbox-label">
-                  <input type="checkbox" />
-                  <span className="checkbox-custom rectangular"></span>
-                </label>
-                <p className="ml-4 text-sm font-semibold text-slate-600 -tracking-wide">
-                  {item}
-                </p>
-              </div>
-            ))}
-          </div>{" "} */}
+
           {/* kategori */}
           <div className="mx-5 my-2">
             <h1 className="text-lg font-bold tracking-wider">Kategori</h1>
-            {kategori.map((item, index) => (
-              <div className="flex items-center my-2 ml-1" key={index}>
+            {categorys.map((category) => (
+              <div className="flex items-center my-2 ml-1" key={category.id}>
                 <label className="checkbox-label">
                   <input
                     type="checkbox"
-                    value={item}
+                    value={category.categoryName}
                     onChange={handleCheckboxChange}
                   />
                   <span className="checkbox-custom rectangular"></span>
                 </label>
                 <p className="ml-4 text-sm font-semibold text-slate-600 -tracking-wide">
-                  {item}
+                  {category.categoryName}
                 </p>
               </div>
             ))}
           </div>
-          {/* level kesulitah */}
+          {/* level kesulitan */}
           <div className="mx-5 my-2">
             <h1 className="text-lg font-bold tracking-wider">
               Level Kesulitan
@@ -99,12 +87,6 @@ const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
                 </p>
               </div>
             ))}
-          </div>
-          {/* tombol untuk hapus filter */}
-          <div className="mx-5 my-3">
-            <button className="w-full p-1 mb-4 font-semibold text-red-500 transition duration-300 bg-white rounded-md -tracking-wider bg-inherit md:bg-transparent hover:bg-red-500 hover:text-white hover:scale-105">
-              Hapus Filter
-            </button>
           </div>
         </div>
       </div>

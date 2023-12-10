@@ -12,6 +12,7 @@ const ProgressCourse = ({
   contentStatus,
   onVideoClick,
 }) => {
+  // const [updatedContentStatus, setUpdatedContentStatus] = useState();
   if (!chapters) {
     return null; // Atau tindakan yang sesuai jika item tidak ada
   }
@@ -26,6 +27,13 @@ const ProgressCourse = ({
     title: 0,
     chapter: 0,
   });
+
+  // const handleContentStatus = (index) => {
+  //   const newContentStatus = [...updatedContentStatus];
+  //   newContentStatus[index] = !newContentStatus[index];
+  //   setUpdatedContentStatus(newContentStatus);
+  // };
+
   return (
     <div
       className={cn(
@@ -73,6 +81,7 @@ const ProgressCourse = ({
                   index={x}
                   isActive={isActive.title === i && isActive.chapter === x}
                   onVideoClick={onVideoClick}
+                  // handleContentStatus={() => handleContentStatus()}
                 />
               </div>
             ))}

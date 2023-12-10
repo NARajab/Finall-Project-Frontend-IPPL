@@ -5,8 +5,6 @@ import CardCategory from "../../components/HomeComponent/CardCategory";
 import ButtonCourse from "../../components/HomeComponent/ButtonCourse";
 import CardCourse from "../../components/HomeComponent/CardCourse";
 import Navbar from "../../components/NavbarComponent/Navbar";
-import Data from "./DataDummy";
-import PropTypes from "prop-types";
 import { getCategory, getCourse } from "../../api/fetching";
 import { decodeToken } from "../../api/payload";
 
@@ -16,6 +14,7 @@ const HomePage = () => {
   const [courses, setCourses] = useState([]);
   const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("..."));
   const [token, setToken] = useState(localStorage.getItem("..."));
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const getUserIdFromToken = () => {
     const token = localStorage.getItem("...");
@@ -34,8 +33,6 @@ const HomePage = () => {
     setToken(localStorage.getItem("..."));
   }, [token]);
 
-  const menuItems = [...new Set(Data.map((val) => val.category))];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,7 +48,10 @@ const HomePage = () => {
     };
     fetchData();
   }, []);
-
+  const menuItems = [...new Set(categories.map((val) => val.categoryName))];
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
   var settingsCategory = {
     dots: true,
     infinite: true,
@@ -61,8 +61,6 @@ const HomePage = () => {
     swipeToSlide: true,
     pauseOnHover: true,
     speed: 800,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 640, // sm
@@ -92,7 +90,6 @@ const HomePage = () => {
   };
 
   var settingsCourse = {
-    nextarrow: true,
     infinite: true,
     slidesToScroll: 1,
     swipeToSlide: true,
@@ -182,16 +179,24 @@ const HomePage = () => {
         {/* button filter */}
         <Slider {...settingsCourse}>
           {menuItems.map((val, i) => (
-            <ButtonCourse key={i} val={val} />
+            <ButtonCourse
+              key={i}
+              val={val}
+              filterItems={handleCategorySelect}
+              isActive={val === selectedCategory}
+            />
           ))}
         </Slider>
-        <button className="flex justify-center w-full px-2 py-2 mt-2 text-xs font-medium text-white duration-300 border-none cursor-pointer lg:mt-4 bg-slate-600 rounded-2xl hover:scale-105 hover:bg-indigo-600 hover:text-white lg:font-semibold">
+        <button
+          className="flex justify-center w-full px-2 py-2 mt-2 text-xs font-medium text-white duration-300 border-none cursor-pointer lg:mt-4 bg-slate-600 rounded-2xl hover:scale-105 hover:bg-indigo-600 hover:text-white lg:font-semibold"
+          onClick={() => handleCategorySelect(null)}
+        >
           All
         </button>
         {/* card kursus populer */}
 
         <div>
-          <CardCourse item={courses} />
+          <CardCourse item={courses} selectedCategory={selectedCategory} />
         </div>
       </div>
     </>
@@ -199,47 +204,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        background: "#050642",
-        borderRadius: "50%",
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-SampleNextArrow.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func,
-};
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: "block",
-        background: "#050642",
-        borderRadius: "50%",
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-SamplePrevArrow.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func,
-};

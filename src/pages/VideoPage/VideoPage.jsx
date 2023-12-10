@@ -10,7 +10,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
 import PopupBuy from "../../components/VideoComponent/PopupBuy";
 // import PopupOnboarding from "../../components/VideoComponent/PopupOnboarding";
-import { getCourseById } from "../../api/fetching";
+import { getCourseById, updateCourseStatus } from "../../api/fetching";
 
 const VideoPage = () => {
   const { userId, courseId } = useParams();
@@ -18,14 +18,16 @@ const VideoPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [course, setCourse] = useState();
   const [videoLink, setVideoLink] = useState();
-  const [status, setStatus] = useState(true);
   const [contentStatus, setContentStatus] = useState(true);
+  const [clickedContentIndex, setClickedContentIndex] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const resData = await getCourseById(userId, courseId);
+        await updateCourseStatus(userId, courseId);
         let allContentStatus = [];
+        // let ContentStatus
 
         resData.chapters.forEach((chapter) => {
           chapter.contents.forEach((content) => {
@@ -33,11 +35,14 @@ const VideoPage = () => {
           });
         });
 
+        console.log(allContentStatus);
+
         const firstChapter = resData.chapters && resData.chapters[0];
         const firstContent = firstChapter && firstChapter.contents[0];
         const firstVideoLink = firstContent && firstContent.contentUrl;
-       
-        console.log(allContentStatus);
+        setClickedContentIndex(0);
+        // console.log(firstContentStatus);
+
         setVideoLink(firstVideoLink);
         setCourse(resData);
         setContentStatus(allContentStatus);
@@ -51,10 +56,23 @@ const VideoPage = () => {
   // console.log(contentStatus);
   const handleSetVideoLink = (link) => {
     setVideoLink(link);
+    // Mengatur status sesuai dengan konten yang di-klik
+    setContentStatus((prevStatus) => {
+      const updatedStatus = [...prevStatus];
+
+      // Hanya memperbarui status menjadi true jika sebelumnya adalah false
+      if (!updatedStatus[clickedContentIndex]) {
+        updatedStatus[clickedContentIndex] = true;
+      }
+
+      return updatedStatus;
+    });
   };
-  const handleStatus = (index) => {
-    setStatus(index);
-  };
+  // console.log(status);
+
+  // const handleStatus = (index) => {
+  //   setStatus(index);
+  // };
 
   return (
     <>
@@ -89,7 +107,11 @@ const VideoPage = () => {
           <div className="grid grid-cols-3 mx-auto gap-x-14 md:mt-5">
             {/* main section, isinya video sama deskripsi course */}
             <div className="col-span-3 lg:col-span-2">
-              <Main courseData={course} videoLink={videoLink} />
+              <Main
+                courseData={course}
+                videoLink={videoLink}
+                contentStatus={contentStatus}
+              />
             </div>
             {/* progress course, ada di sebelah kanan */}
             <div className="col-span-3 lg:col-span-1">
@@ -98,7 +120,7 @@ const VideoPage = () => {
                 chapters={course}
                 handleVideoLink={handleSetVideoLink}
                 contentStatus={contentStatus}
-                onVideoClick={handleStatus}
+                onVideoClick={clickedContentIndex}
               />
             </div>
           </div>

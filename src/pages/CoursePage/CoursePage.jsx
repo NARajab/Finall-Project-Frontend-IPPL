@@ -3,7 +3,7 @@ import Main from "../../components/CourseComponent/Main";
 import SideFilter from "../../components/CourseComponent/SideFilter";
 import Navbar from "../../components/NavbarComponent/Navbar";
 import { useState, useEffect } from "react";
-import { getCourse, createCourse } from "../../api/fetching";
+import { getCourse, createCourse, getCategory } from "../../api/fetching";
 import { useParams, useNavigate } from "react-router-dom";
 
 const CoursePage = () => {
@@ -17,9 +17,11 @@ const CoursePage = () => {
     const fetchData = async () => {
       try {
         const resCourse = await getCourse();
+        const resGetCategory = await getCategory();
         setCourses(resCourse);
-        setCategory(resCourse.Category);
-        setLevel(resCourse.courseLevel);
+        setCategory(resGetCategory);
+        // setCategory(resCourse.Category);
+        setLevel(resCourse.Level);
 
         console.log(resCourse);
       } catch (err) {
@@ -28,11 +30,11 @@ const CoursePage = () => {
     };
     fetchData();
   }, []);
+  const handleCheckboxChange = (e) => {
+    setValueChecked(e.target.checked ? e.target.value : "");
+  };
+  console.log(valueChecked);
 
-  // const handleCreateCourse = async(userId) => {
-  //   const res = await createCourse(userId, courseId);
-  //   navigate("/video/")
-  // }
   const handleCardClick = async (courseId) => {
     const token = localStorage.getItem("...");
 
@@ -55,9 +57,6 @@ const CoursePage = () => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    setValueChecked(e.target.checked ? e.target.value : "");
-  };
   console.log(valueChecked);
   return (
     <>
@@ -95,7 +94,7 @@ const CoursePage = () => {
               <div className="col-span-3 md:col-span-2">
                 <Main
                   valueChecked={valueChecked}
-                  course={courses}
+                  courses={courses}
                   handleCardClick={handleCardClick}
                 />
               </div>
