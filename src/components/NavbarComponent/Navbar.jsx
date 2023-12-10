@@ -10,6 +10,7 @@ import { FiMenu } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { decodeToken } from "../../api/payload";
+import logo from "../../assets/no bg putih.png";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -97,11 +98,7 @@ const Navbar = () => {
           {/* logo */}
           <div>
             <Link to={"/"}>
-              <img
-                src="../../src/assets/no bg putih.png"
-                alt="logo"
-                className="w-10 h-10"
-              />
+              <img src={logo} alt="logo" className="w-10 h-10" />
             </Link>
           </div>
 
