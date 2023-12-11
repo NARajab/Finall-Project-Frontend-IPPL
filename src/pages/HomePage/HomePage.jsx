@@ -40,8 +40,6 @@ const HomePage = () => {
         const resCourse = await getCourse();
         setCategories(resCategory);
         setCourses(resCourse);
-        // console.log(resCategory);
-        console.log(resCourse);
       } catch (err) {
         throw new Error(err.message);
       }

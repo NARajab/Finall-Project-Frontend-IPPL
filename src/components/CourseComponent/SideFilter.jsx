@@ -41,20 +41,6 @@ const SideFilter = ({ categorys, levels, handleCheckboxChange }) => {
             <XCircle />
           </div>
           {/* filter  */}
-          {/* <div className="mx-5 my-2 mt-6">
-            <h1 className="text-lg font-bold tracking-wider">Filter</h1>
-            {filter.map((item, index) => (
-              <div className="flex items-center my-2 ml-1" key={index}>
-                <label className="checkbox-label">
-                  <input type="checkbox" />
-                  <span className="checkbox-custom rectangular"></span>
-                </label>
-                <p className="ml-4 text-sm font-semibold text-slate-600 -tracking-wide">
-                  {item}
-                </p>
-              </div>
-            ))}
-          </div>{" "} */}
           {/* kategori */}
           <div className="mx-5 my-2">
             <h1 className="text-lg font-bold tracking-wider">Kategori</h1>

@@ -35,7 +35,7 @@ const Card = ({ item, id }) => {
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-semibold text-black lg:text-base -tracking-widest md:-tracking-wider">
-                  {item.aboutCourse}
+                  {item.courseName}
                 </h3>
                 <div className="flex flex-wrap justify-between mt-3">
                   <p className="flex items-center text-xs font-semibold text-color-primary -tracking-widest md:-tracking-wider">

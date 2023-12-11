@@ -13,13 +13,10 @@ const ChapterItem = ({ contentData, isActive, handleVideoLink, index }) => {
 
   const chapterId = contentData.chapterId;
   const contentId = contentData.id;
-  // console.log(chapterId);
-  console.log(contentData);
 
   const handleContentStatus = async () => {
     try {
-      const res = await updateStatus(chapterId, contentId);
-      console.log(res);
+      await updateStatus(chapterId, contentId);
     } catch (err) {
       throw new Error(err.message);
     }
@@ -46,8 +43,6 @@ const ChapterItem = ({ contentData, isActive, handleVideoLink, index }) => {
               <FaCirclePlay
                 className="w-5 h-5"
                 style={{ color: status ? "#73CA5C" : "#6148FF" }}
-                // onClick={contentData.contentUrl}
-                // onClick={onVideoClick}
               />
             )}
           </span>

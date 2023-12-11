@@ -25,7 +25,6 @@ const MyCoursePage = () => {
         setCategory(resGetCategory);
         setCategories(resGetCategory.Category);
         setLevel(resGetUserCourse);
-        console.log(resGetCategory);
       } catch (err) {
         throw new Error(err.message);
       }

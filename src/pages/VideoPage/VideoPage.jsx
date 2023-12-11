@@ -8,7 +8,6 @@ import Main from "../../components/VideoComponent/Main";
 import { CiBoxList } from "react-icons/ci";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
-import PopupBuy from "../../components/VideoComponent/PopupBuy";
 // import PopupOnboarding from "../../components/VideoComponent/PopupOnboarding";
 import { getCourseById, updateCourseStatus } from "../../api/fetching";
 
@@ -35,13 +34,10 @@ const VideoPage = () => {
           });
         });
 
-        console.log(allContentStatus);
-
         const firstChapter = resData.chapters && resData.chapters[0];
         const firstContent = firstChapter && firstChapter.contents[0];
         const firstVideoLink = firstContent && firstContent.contentUrl;
         setClickedContentIndex(0);
-        // console.log(firstContentStatus);
 
         setVideoLink(firstVideoLink);
         setCourse(resData);
@@ -53,7 +49,6 @@ const VideoPage = () => {
     fetchData();
   }, [userId, courseId]);
 
-  // console.log(contentStatus);
   const handleSetVideoLink = (link) => {
     setVideoLink(link);
     // Mengatur status sesuai dengan konten yang di-klik
@@ -68,17 +63,10 @@ const VideoPage = () => {
       return updatedStatus;
     });
   };
-  // console.log(status);
-
-  // const handleStatus = (index) => {
-  //   setStatus(index);
-  // };
 
   return (
     <>
       <Navbar />
-      {/* <PopupOnboarding /> */}
-      <PopupBuy />
       {/* tombol untuk menampilkan/menghilangkan progressCourse */}
       <div className="lg:hidden fixed bottom-2 sm:bottom-4 md:bottom-6 left-[50%] -translate-x-[50%] z-30  duration-300 transition-all">
         <button

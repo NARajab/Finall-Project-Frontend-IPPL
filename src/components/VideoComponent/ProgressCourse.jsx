@@ -12,7 +12,6 @@ const ProgressCourse = ({
   contentStatus,
   onVideoClick,
 }) => {
-  // const [updatedContentStatus, setUpdatedContentStatus] = useState();
   if (!chapters) {
     return null; // Atau tindakan yang sesuai jika item tidak ada
   }
@@ -21,18 +20,11 @@ const ProgressCourse = ({
     return null;
   }
   const chapter = chapters.chapters;
-  // console.log(chapter);
 
   const [isActive, setIsActive] = useState({
     title: 0,
     chapter: 0,
   });
-
-  // const handleContentStatus = (index) => {
-  //   const newContentStatus = [...updatedContentStatus];
-  //   newContentStatus[index] = !newContentStatus[index];
-  //   setUpdatedContentStatus(newContentStatus);
-  // };
 
   return (
     <div
@@ -96,8 +88,6 @@ ProgressCourse.propTypes = {
   isOpen: PropTypes.bool,
   chapters: PropTypes.object,
   handleVideoLink: PropTypes.func,
-  contentStatus: PropTypes.array,
-  onVideoClick: PropTypes.func,
 };
 
 export default ProgressCourse;

@@ -38,7 +38,6 @@ const OTPPage = () => {
   const handleResendCode = async () => {
     try {
       const res = await resendOtp(email);
-      console.log(res);
       setAlertMessage({ type: "success", res });
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -57,7 +56,6 @@ const OTPPage = () => {
   const handleVerify = async () => {
     try {
       const res = await verifyOtp(code, userId);
-      console.log(code);
       setAlertMessage({ type: "success", message: res });
 
       navigate("/login");
@@ -68,26 +66,6 @@ const OTPPage = () => {
       });
     }
   };
-
-  //   const handleClearOTP = () => {
-  //     setOtp("/"); // Mengatur ulang nilai OTP menjadi string kosong
-  //   };
-
-  // const handleKeyPress = (event) => {
-  //    if (event.key === "Enter") {
-  //       // Saat tombol "Enter" ditekan, panggil fungsi verifikasi
-  //       handleVerify();
-  //    }
-  // };
-
-  //   const handleResendCode = async () => {
-  //     if (!isTimerActive) {
-  //       setIsTimerActive(true);
-  //       setTimer(60);
-  //       // Add logic to resend OTP here
-  //    }
-
-  //   };
 
   return (
     <>

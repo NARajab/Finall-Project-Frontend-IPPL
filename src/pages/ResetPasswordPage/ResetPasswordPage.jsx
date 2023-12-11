@@ -16,10 +16,6 @@ const ResetPasswordPage = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [isEmptyFieldError, setIsEmptyFieldError] = useState(false);
 
-  // const handleClick = () => {
-  //   setIsLoading(true);
-  //   setTimeout(() => setIsLoading(false), 2000);
-  // };
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };

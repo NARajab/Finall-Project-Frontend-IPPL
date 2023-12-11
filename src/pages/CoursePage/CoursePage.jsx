@@ -20,10 +20,7 @@ const CoursePage = () => {
         const resGetCategory = await getCategory();
         setCourses(resCourse);
         setCategory(resGetCategory);
-        // setCategory(resCourse.Category);
         setLevel(resCourse.Level);
-
-        console.log(resCourse);
       } catch (err) {
         throw new Error(err.message);
       }
@@ -33,17 +30,15 @@ const CoursePage = () => {
   const handleCheckboxChange = (e) => {
     setValueChecked(e.target.checked ? e.target.value : "");
   };
-  console.log(valueChecked);
 
   const handleCardClick = async (courseId) => {
     const token = localStorage.getItem("...");
 
     try {
-      const res = await createCourse(userId, courseId, token);
-      console.log(res);
+      await createCourse(userId, courseId, token);
+
       navigate(`/video/${userId}/${courseId}`);
     } catch (error) {
-      console.error("Error creating course:", error.message);
       if (
         error.response &&
         error.response.data &&
@@ -56,8 +51,6 @@ const CoursePage = () => {
       }
     }
   };
-
-  console.log(valueChecked);
   return (
     <>
       <Navbar />
@@ -65,7 +58,7 @@ const CoursePage = () => {
         <div className="w-10/12 mx-auto">
           <div className="flex items-center justify-between">
             <h1 className="text-sm font-bold md:text-xl lg:text-2xl">
-              Kelas Berjalan
+              Topik Kelas
             </h1>
             <div className="lg:w-3/12">
               <form className="relative w-full">

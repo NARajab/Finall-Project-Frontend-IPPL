@@ -4,7 +4,6 @@ const DescriptionCourse = ({ item }) => {
   if (!item) {
     return null; // Atau tindakan yang sesuai jika item tidak ada
   }
-  // console.log(item);
   return (
     <div className="mx-4 mb-5 md:mx-0">
       <div className="flex flex-col">

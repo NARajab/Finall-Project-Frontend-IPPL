@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import { cn } from "../../libs/utils";
 import Card from "./Card";
 import PropTypes from "prop-types";
 
 const Main = ({ courses, valueChecked, handleCardClick, id }) => {
-  // console.log(data);
-  // console.log(courses[0].courseLevel);
   const [flag, setFlag] = useState(0);
 
   const filterCourses = () => {

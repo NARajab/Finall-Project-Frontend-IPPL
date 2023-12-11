@@ -30,7 +30,6 @@ const UserPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("...");
-    // console.log(token);
     const fetchData = async () => {
       try {
         const resGetMe = await getMe(token);
@@ -41,10 +40,8 @@ const UserPage = () => {
         setImage(resGetMe.image);
         setCountry(resGetMe.country);
         setCity(resGetMe.city);
-
-        // console.log(resGetMe);
       } catch (err) {
-        throw new Error(err.message);
+        throw new Error(err.meplitesage);
       }
     };
     fetchData();
@@ -65,36 +62,14 @@ const UserPage = () => {
       );
       setImage(resUpdate.image);
       window.location.reload(true);
-      // console.log(resUpdate);
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        setAlertMessage({ type: "error", message: err.response.data.message });
+        setAlertMessage({ type: "error", message: err.relitonse.data.message });
       } else {
         setAlertMessage({ type: "error", message: err.message });
       }
     }
   };
-
-  // const handleSaveProfile = () => {
-  // Disni nanti kita akan req ke server database untuk disimpan datanya
-  // console.log('Profil disimpan:', profile);
-
-  // validasi apakah semua data sudah diisi
-  //   if (Object.values(profile).every((value) => value.trim() !== "")) {
-  //     toast.success("Profilmu Berhasil Disimpan Horee🥳", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   } else {
-  //     toast.error("Harap isi semua data profilmu yah!😊");
-  //   }
-  // };
 
   return (
     <>
@@ -148,10 +123,6 @@ const UserPage = () => {
                       hidden
                       accept="image/*"
                       onChange={(e) => setImage(e.target.files[0])}
-                      // onChange={(e) => {
-                      //   let pic = URL.createObjectURL(e.target.files[0]);
-                      //   setPicture(pic);
-                      // }}
                     />
                   </div>
                   <div className="flex flex-row items-center gap-1 mt-2 mb-1">
@@ -178,23 +149,6 @@ const UserPage = () => {
                       className="w-64 px-2 py-2 text-xs placeholder-black border-2 rounded-xl border-slate-300"
                     />
                   </div>
-                  {/* email */}
-                  {/* <div className="text-left">
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-800"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={email}
-                      onChange={handleChange}
-                      className="w-64 px-2 py-2 text-xs placeholder-black border-2 rounded-xl border-slate-300"
-                    />
-                  </div> */}
                   {/* no telepon */}
                   <div className="text-left">
                     <label

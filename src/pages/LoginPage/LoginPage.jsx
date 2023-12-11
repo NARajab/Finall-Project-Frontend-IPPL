@@ -16,10 +16,6 @@ const LoginPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-  // const handleClick = () => {
-  //   setIsLoading(true);
-  //   setTimeout(() => setIsLoading(false), 2000);
-  // };
   const handlePassword = async () => {
     if (!email) {
       setAlertMessage("Please enter your email");

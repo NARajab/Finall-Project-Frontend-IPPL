@@ -49,23 +49,11 @@ const UserPage = () => {
       }
     }
   };
-  console.log(oldPassword);
-  console.log(newPassword);
-  console.log(confirmPassword);
 
   // fungsi buka tutup hamburger menu
   const handleHamburgerClick = () => {
     setOpenHamburger(!openHamburger);
   };
-
-  // fungsi untuk mengupdate nilai dari masing-masing password jika terjadi perubahan pada input
-  // const handleInputChange = (inputName) => (event) => {
-  //   const inputValue = event.target.value;
-  //   setPasswords((prevPasswords) => ({
-  //     ...prevPasswords,
-  //     [inputName]: inputValue,
-  //   }));
-  // };
 
   return (
     <>

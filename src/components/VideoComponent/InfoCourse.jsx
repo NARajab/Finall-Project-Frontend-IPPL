@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // isinya info tentang course, kyk judul, rating, kategori, dll
 const InfoCourse = ({ item }) => {
   if (!item) {
-    return null; // Atau tindakan yang sesuai jika item tidak ada
+    return null;
   }
   return (
     <div className="mx-4 md:mx-0">

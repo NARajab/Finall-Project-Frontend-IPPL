@@ -5,8 +5,6 @@ import { FaStar } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 const CardCourse = ({ item, selectedCategory }) => {
-  console.log(item);
-
   const filteredItems = selectedCategory
     ? item.filter((val) => val.Category === selectedCategory)
     : item;
@@ -46,7 +44,7 @@ const CardCourse = ({ item, selectedCategory }) => {
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-semibold text-black lg:text-base -tracking-widest md:-tracking-wider">
-                  {val.aboutCourse}
+                  {val.courseName}
                 </h3>
                 <p className="text-sm font-semibold text-black">
                   {val.courseBy}
