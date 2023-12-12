@@ -13,7 +13,6 @@ import { getCourseById, updateCourseStatus } from "../../api/fetching";
 
 const VideoPage = () => {
   const { userId, courseId } = useParams();
-  // keperluan untuk layar mobile
   const [isOpen, setIsOpen] = useState(false);
   const [course, setCourse] = useState();
   const [videoLink, setVideoLink] = useState();
